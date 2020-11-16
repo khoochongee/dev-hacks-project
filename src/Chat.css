@@ -1,0 +1,54 @@
+.chat{
+    width:80%;
+    margin:auto;
+    height: 100%;        
+}
+
+.chat__messagesContainer{
+    height:75vh;    
+    overflow: auto;    
+}
+
+.chat__messagesContainer::-webkit-scrollbar{
+    display: none;
+}
+
+.chat__messages{
+    display:flex;
+    flex-direction: column;
+    height:max-content;
+    padding:10px 5px;
+    justify-content:flex-end;                        
+}
+
+.chat__form{
+    display: flex;
+    justify-content: space-around;          
+    padding:10px 0 10px 10px;
+    box-sizing: content-box;
+}
+
+.chat__messageTextField{
+    flex:1;    
+}
+
+.chat__emojiPickerButton{
+    border:none !important;
+    color:rgba(255, 175, 0,0.7) !important;
+    transition: all 0.25s !important;
+    /* background-color: transparent !important; */
+}
+
+.chat__emojiPickerButton:hover,.chat__emojiPickerButton:active{
+    color:rgba(255, 175, 0,1) !important;
+}
+
+.chat__messageSendButton{    
+    transition: 0.25s !important;        
+    background-color: transparent !important;
+    color:rgba(0, 153, 255,0.7) !important;
+}
+
+.chat__messageSendButton:hover,.chat__messageSendButton:focus{        
+    color:rgba(0, 153, 255,1) !important;
+}

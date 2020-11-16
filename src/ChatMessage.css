@@ -1,0 +1,81 @@
+.messageRow{
+    display: flex;    
+    margin:0.5rem 0;
+}
+
+.messageRow__send{
+    justify-content: flex-end;
+    margin-right: 0;
+}
+
+.messageRow__receive{
+    justify-content: flex-start;
+}
+
+.messageRow__receive__profilePic{
+    align-self: flex-end;
+    margin-bottom: 2px;
+}
+
+.message{    
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    flex:1;
+}
+
+.message__username{    
+    font-size: x-small;   
+    font-weight: 600;
+    color:#808080;
+    margin-left:10px;
+}
+
+.messageBubble{
+    padding:6px 12px 7px;    
+    /* border-radius:25px;     */
+    max-width:50%;    
+    box-sizing: content-box;                
+}
+
+.messageBubble__send{
+    background-color:rgb(0, 153, 255);
+    align-self: flex-end;    
+    color:white; 
+    position: relative; 
+    margin-right:10px;  
+    border-radius:8px 8px 0; 
+}
+
+.messageBubble__send:after {
+    content: '';
+    position: absolute;    
+    bottom: 0;
+    width: 0;
+    height: 0;
+    border: 10px solid;
+    border-color: transparent transparent rgb(0, 153, 255) transparent;  
+}
+
+.messageBubble__receive{
+    background-color:#f1f0f0;
+    color:black;
+    align-self: flex-start;
+    position: relative;    
+    margin-left:10px;    
+    border-radius: 8px 8px 8px 0;
+}
+
+.messageBubble__receive:after {
+	content: '';
+	position: absolute;
+	left: 0;
+	bottom: 0;
+	width: 0;
+	height: 0;
+	border: 10px solid transparent;
+	border-right-color: #f1f0f0;
+    border-left: 0;    
+    margin-bottom: -5px;    
+	transform: rotate(90deg);
+}

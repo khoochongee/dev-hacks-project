@@ -1,0 +1,13 @@
+.service__chat{
+    position:fixed !important;
+    bottom:10px !important;
+    right:10px !important;
+    z-index:1 !important;
+    opacity: 0.5 !important;
+    background-color: white !important;
+    box-shadow: 0 0 5px 0 #cdcdcd;
+}
+
+.service__chat:hover{
+    opacity: 1 !important;
+}
