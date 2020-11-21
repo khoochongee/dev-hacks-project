@@ -9,10 +9,11 @@ import {auth} from "./firebase";
 import "./Auth.css";
 
 function Auth(props) {
-    const [isSignin,setIsSignin] = useState(true);    
+    const [isSignin,setIsSignin] = useState(true);
     const [username,setUsername] = useState('');  
     const [email,setEmail] = useState('');
-    const [password,setPassword] = useState('');    
+    const [password,setPassword] = useState('');  
+    const [passwordError,setPasswordError] = useState(false);    
 
     const uiConfig = {
         // Popup signin flow rather than redirect flow.
@@ -50,29 +51,33 @@ function Auth(props) {
       
     const authHandler = (event) => {
         event.preventDefault();    
-        if(isSignin){
-            auth.signInWithEmailAndPassword(email,password)
-                .then(result=>{                    
-                })
-                .catch(err=>{
-                    console.log(err);
-                });
-        }else{
-            auth.createUserWithEmailAndPassword(email,password)
-                .then(result=>{
-                    result.user.updateProfile({
-                        displayName:username
+        if(password.length >= 6 && email.match(/^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/)){
+            if(isSignin){
+                auth.signInWithEmailAndPassword(email,password)
+                    .then(result=>{                    
                     })
-                })
-                .catch(err=>{
-                    console.log(err);
-                });
+                    .catch(err=>{
+                        console.log(err);
+                    });
+            }else{
+                auth.createUserWithEmailAndPassword(email,password)
+                    .then(result=>{
+                        result.user.updateProfile({
+                            displayName:username
+                        })
+                    })
+                    .catch(err=>{
+                        console.log(err);
+                    });
+            }
+            props.authLoading();
+            props.cancelShowAuth();        
+            setUsername("");
+            setEmail("");
+            setPassword("");
+        }else{
+            alert("Passsword field should have minimun 6 characters or Email field is not fulfill requirement");
         }
-        props.authLoading();
-        props.cancelShowAuth();        
-        setUsername("");
-        setEmail("");
-        setPassword("");
     }
     return (
         <div className="auth">
@@ -82,7 +87,7 @@ function Auth(props) {
                 <form className="auth__form" onSubmit={authHandler}>
                     {!isSignin && <TextField label="Username" variant="filled" className="form__input" value={username} onChange={(event)=>setUsername(event.target.value)}/>}
                     <TextField label="Email" variant="filled" className="form__input" value={email} onChange={(event)=>setEmail(event.target.value)}/>
-                    <TextField label="Password" variant="filled" className="form__input" type="password" value={password} onChange={(event)=>setPassword(event.target.value)}/>
+                    <TextField label="Password" variant="filled" className="form__input" type="password"  value={password} onChange={(event)=>setPassword(event.target.value)}/>
                     <Button className="form__button" onClick={authHandler} variant="contained">{isSignin ? "Sign In" : "Sign Up"}</Button>
                     <div className="form__switchAuthMethod">{isSignin ? "Don't have an account yet? Create one" : "Already have an account? Sign In" }<span className="switchAuthMethod__word" onClick={()=>setIsSignin(!isSignin)}> here</span></div>
                     <div className="form__otherAuthMethod">
